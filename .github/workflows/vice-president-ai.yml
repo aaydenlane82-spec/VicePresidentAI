@@ -1,0 +1,37 @@
+name: Vice President AI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  run-vp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Force clean workspace
+        run: |
+          git clean -xfd
+          ls -la
+
+      - name: Show vp.py contents (DEBUG PROOF)
+        run: |
+          echo "===== VP.PY CONTENTS ====="
+          sed -n '1,200p' vp.py
+          echo "=========================="
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run VP
+        run: python vp.py
