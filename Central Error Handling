@@ -1,0 +1,8 @@
+try:
+    # normal code
+except FileNotFoundError:
+    # auto-create missing file
+except KeyError as e:
+    # fill missing key in memory.json or upgrades.json
+except Exception as e:
+    # log error and attempt a generic fix
